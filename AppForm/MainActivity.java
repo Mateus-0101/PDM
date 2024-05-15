@@ -2,12 +2,16 @@ package com.example.appform;
 
 import android.os.Bundle;
 import android.view.View;
-
+import android.widget.EditText;
+import android.util.Log;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import iesb.app.CadastroVO;
+import iesb.app.Cadastro;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,15 +29,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void loadCadastroLayout(View view){
 
-        EditText nomeEditText = (EditText) findViewById(R.id.nome);
+        EditText nomeEditText = (EditText) findViewById(R.id.nomeCompleto);
         String nomeCompleto = nomeEditText.getText().toString();
 
         //  Popular VO com dados:
         CadastroVO vo;
         Cadastro cadastro = new Cadastro();
+        vo = new CadastroVO();
+        vo.setNomeCompleto(nomeCompleto);
         vo = cadastro.efetuaCadastro(1,"701", "Mateus Adolfo", "Homi", "22", "c 2", "6157");
 
         //  Simula insert em um Banco de Dados
-        log.i("info", vo.getNomeCompelto());
+        Log.i("info", vo.getNomeCompleto());
     }
 }
