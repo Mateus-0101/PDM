@@ -3,6 +3,7 @@ package iesb.app.sqliteapp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         db.addCliente(new ClienteVO("Hades"));
         db.addCliente(new ClienteVO("Lula"));
 
+        //EditText nomeEditText = (EditText) findViewById(R.id.nome);
+        //CadastroVO vo = new CadastroVO();
+        //vo.setNome(nomeEditText.getText().toString());
         Log.d("Select: ", "Lendo os Clientes...");
         List<ClienteVO> clientes = db.getAllClientes();
 
