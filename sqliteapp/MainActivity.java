@@ -28,20 +28,21 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
-    
+
     public void btnOnClickCadastrarCliente(View view){
         DatabaseHandler db = new DatabaseHandler(this);
         Log.d("Insert: ", "Inserindo clientes...");
         db.addCliente(new ClienteVO("Satan"));
         db.addCliente(new ClienteVO("Hades"));
         db.addCliente(new ClienteVO("Lula"));
-        
+
         Log.d("Select: ", "Lendo os Clientes...");
         List<ClienteVO> clientes = db.getAllClientes();
-        
+
         for (ClienteVO cliente : clientes){
-            String log = "Id: " + cliente.getId();
+            String log = "Id: " + cliente.getId() + ",Nome: " + cliente.getNome();
+            Log.d("Nome >> ",log);
         }
     }
-    
+
 }
