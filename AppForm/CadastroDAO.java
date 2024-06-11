@@ -24,7 +24,8 @@ public class ClienteDAO extends SQLiteOpenHelper {
     private static final String KEY_ID = " id ";
     private static final String NOME = " nome ";
     private static final String EMAIL = " email ";
-    public ClienteDA0(Context context){
+    
+    public ClienteDAO(Context context){
         super(context, DATABA_NAME, null, DATABASE_VERSION);
     }
 
