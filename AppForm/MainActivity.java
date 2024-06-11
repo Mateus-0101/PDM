@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         EditText txtEmail = (EditText) findViewById(R.id.email);
         String Email = txtEmail.getText().toString();
 
-        ClienteDA0 db = new ClienteDA0(this);
+        ClienteDAO db = new ClienteDAO(this);
         ClienteVO vo = new ClienteVO(Nome, Email);
 
 
