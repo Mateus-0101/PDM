@@ -32,7 +32,7 @@ public class ClienteDAO extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_TB_CLIENTES = "CREATE TABLE " + TB_CLIENTES + " (" + KEY_ID + "INTEGER PRIMARY KEY," +NOME + " TEXT, " + EMAIL + " TEXT )";
+        String CREATE_TB_CLIENTES = "CREATE TABLE " + TB_CLIENTES + " (" + KEY_ID + "INTEGER PRIMARY KEY," + NOME + " TEXT, " + EMAIL + " TEXT )";
         db.execSQL(CREATE_TB_CLIENTES);
     }
 
