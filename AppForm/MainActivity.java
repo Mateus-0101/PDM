@@ -43,3 +43,23 @@ public class MainActivity extends AppCompatActivity {
         Log.i("info", vo.getNomeCompleto());
     }
 }
+
+ public void btnOnClickCadastrarCliente(View view){
+
+        EditText txtNome = (EditText) findViewById(R.id.Nome);
+        String Nome = txtNome.getText().toString();
+
+        EditText txtEmail = (EditText) findViewById(R.id.email);
+        String Email = txtEmail.getText().toString();
+
+        ClienteDA0 db = new ClienteDA0(this);
+        ClienteVO vo = new ClienteVO(Nome, Email);
+
+
+        db.addCliente(new ClienteVO(Nome, Email));
+
+        db.addCliente(vo);
+
+        Log.d("Insert:","Inserindo clientes");
+    }
+}
