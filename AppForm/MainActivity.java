@@ -1,17 +1,20 @@
-package com.example.appform;
+package iesb.app.sqliteapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.util.Log;
+import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import iesb.app.CadastroVO;
-import iesb.app.Cadastro;
+import java.util.List;
+import iesb.app.sqliteapp.dao.ClienteDAO;
+import iesb.app.sqliteapp.model.ClienteVO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,32 +22,67 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
+        setContentView(R.layout.tela_inicial);
+
+    }
+
+    public void btnOnclickIniciarCadastro(View view){
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+    }
+    public void btnOnclickVoltarTelaInicial(View view){
+        setContentView(R.layout.tela_inicial);
+
     }
 
-    public void loadCadastroLayout(View view){
+    public void btnOnclickTelaAtualizar(View view){
+        setContentView(R.layout.atualizar);
 
-        EditText nomeEditText = (EditText) findViewById(R.id.nomeCompleto);
-        String nomeCompleto = nomeEditText.getText().toString();
-
-        //  Popular VO com dados:
-        CadastroVO vo;
-        Cadastro cadastro = new Cadastro();
-        vo = new CadastroVO();
-        vo.setNomeCompleto(nomeCompleto);
-        vo = cadastro.efetuaCadastro(1,"701", "Mateus Adolfo", "Homi", "22", "c 2", "6157");
-
-        //  Simula insert em um Banco de Dados
-        Log.i("info", vo.getNomeCompleto());
     }
-}
 
- public void btnOnClickCadastrarCliente(View view){
+    public void btnOnclickTelaDeletar(View view){
+        setContentView(R.layout.deletar);
+
+    }
+
+    public void btnOnclickAtualizarUsuario(View view){
+
+        EditText txtNome = (EditText) findViewById(R.id.NomeAtualizar);
+        String Nome = txtNome.getText().toString();
+
+        EditText txtEmail = (EditText) findViewById(R.id.EmailAtualizar);
+        String Email = txtEmail.getText().toString();
+
+        ClienteDAO db = new ClienteDAO(this);
+        ClienteVO vo = new ClienteVO(Nome, Email);
+
+        //  db.updateCliente(new ClienteVO(Nome, Email));
+
+        db.updateCliente(vo);
+
+        Log.d("Update:","Atualizando clientes");
+    }
+
+    public void btnOnclickDeletarUsuario(View view){
+
+        EditText txtNome = (EditText) findViewById(R.id.NomeAtualizar);
+        String Nome = txtNome.getText().toString();
+
+        EditText txtEmail = (EditText) findViewById(R.id.EmailAtualizar);
+        String Email = txtEmail.getText().toString();
+
+        ClienteDAO db = new ClienteDAO(this);
+        ClienteVO vo = new ClienteVO(Nome, Email);
+
+        //  db.deleteCliente(new ClienteVO(Nome, Email));
+
+        db.deleteCliente(vo);
+
+        Log.d("Delete:","Deletando clientes");
+    }
+
+    public void btnOnClickCadastrarCliente(View view){
 
         EditText txtNome = (EditText) findViewById(R.id.Nome);
         String Nome = txtNome.getText().toString();
@@ -61,5 +99,24 @@ public class MainActivity extends AppCompatActivity {
         db.addCliente(vo);
 
         Log.d("Insert:","Inserindo clientes");
+    }
+
+    public void btnOnclickListarUsuarios(View view){
+
+        ClienteDAO db = new ClienteDAO(this);
+
+        List<ClienteVO> clientes = db.getAllClientes();
+
+        TextView lista = (TextView) findViewById(R.id.Nome);
+
+        for (ClienteVO cliente: clientes){
+            lista.setText(lista.getText() +
+                    "Nome: " + cliente.getNome() +
+                    " , Email: " + cliente.getEmail() +
+                    "\n"
+            );
+        }
+
+        db.close();
     }
 }
