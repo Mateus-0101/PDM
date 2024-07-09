@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
     public void btnOnClickCadastrarCliente(View view){
         DatabaseHandler db = new DatabaseHandler(this);
         Log.d("Insert: ", "Inserindo clientes...");
-        db.addCliente(new ClienteVO("Satan"));
-        db.addCliente(new ClienteVO("Hades"));
-        db.addCliente(new ClienteVO("Lula"));
+        db.addCliente(new ClienteVO("Saul"));
+        db.addCliente(new ClienteVO("Hank"));
+        db.addCliente(new ClienteVO("Walter"));
 
         //EditText nomeEditText = (EditText) findViewById(R.id.nome);
         //CadastroVO vo = new CadastroVO();
